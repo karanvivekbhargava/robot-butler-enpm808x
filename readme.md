@@ -2,6 +2,9 @@
 [![Build Status](https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x.svg?branch=master)](https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x)
 [![Coverage Status](https://coveralls.io/repos/github/karanvivekbhargava/robot-butler-enpm808x/badge.svg?branch=master)](https://coveralls.io/github/karanvivekbhargava/robot-butler-enpm808x?branch=master)
 ---
+## SIP Overview
+---
+Click this link to view the product backlog, time sheets, defect logs and release backlog - [link](https://docs.google.com/spreadsheets/d/1WOvV6iL4gGOF8Qacwj2R3Lom71wziKXEf_UEhdGfOuY/edit?usp=sharing)
 
 ## Overview
 
