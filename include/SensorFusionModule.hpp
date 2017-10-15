@@ -25,6 +25,7 @@ class SensorFusionModule {
  private:
   std::vector<float> imageProbabilities_, lidarProbabilities_;
   bool diagnostic_;
+
  public:
   /**
    * @brief      Constructor

@@ -12,12 +12,15 @@
  *
  */
 
-#include <SensorFusionModule.hpp>
+#include <vector>
+#include "SensorFusionModule.hpp"
 
 /**
  * @brief      Constructs the object.
  */
-SensorFusionModule::SensorFusionModule() {}
+SensorFusionModule::SensorFusionModule() {
+  diagnostic_ = true;  // Set the diagnostics to true
+}
 
 /**
  * @brief      Destroys the object.
@@ -30,7 +33,7 @@ SensorFusionModule::~SensorFusionModule() {}
  * @param[in]  input  The input
  */
 void SensorFusionModule::setLidarProbabilities(std::vector<float> input) {
-  // TODO(Karan): Set the input
+  lidarProbabilities_ = input;  // Set the input
 }
 
 /**
@@ -39,7 +42,7 @@ void SensorFusionModule::setLidarProbabilities(std::vector<float> input) {
  * @param[in]  input  The input
  */
 void SensorFusionModule::setImageProbabilities(std::vector<float> input) {
-  // TODO(Karan): Set the input
+  imageProbabilities_ = input;  // Set the input
 }
 
 /**
@@ -48,7 +51,16 @@ void SensorFusionModule::setImageProbabilities(std::vector<float> input) {
  * @return     Fused sensor probabilities
  */
 std::vector<float> SensorFusionModule::fuseData() {
-  // TODO(Karan): Set the input
+  // Choose higher of both the probabilities and return a fused probability
+  std::vector<float> fuse;
+  for (unsigned int i = 0; i < imageProbabilities_.size(); i++) {
+    if (imageProbabilities_[i] > lidarProbabilities_[i]) {
+      fuse.push_back(imageProbabilities_[i]);
+    } else {
+      fuse.push_back(lidarProbabilities_[i]);
+    }
+  }
+  return fuse;
 }
 
 /**
@@ -57,6 +69,5 @@ std::vector<float> SensorFusionModule::fuseData() {
  * @return     The diagnostic truth value.
  */
 bool SensorFusionModule::getDiagnostic() {
-  // TODO(Karan):
-  return false;
+  return diagnostic_;  // return the diagnostics
 }
