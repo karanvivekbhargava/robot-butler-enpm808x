@@ -17,14 +17,16 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 /**
  * @brief      Class for path planning module.
  */
 class PathPlanningModule {
  private:
-  int currentHeadingDirection_;
-  bool diagnostic_;
+  int currentHeadingDirection_ = 0;
+  bool diagnostic_ = false;
+
  public:
   /**
    * @brief      Constructor
