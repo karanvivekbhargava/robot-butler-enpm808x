@@ -31,6 +31,7 @@ class Robot {
   LidarModule lidar_;
   SensorFusionModule fusion_;
   PathPlanningModule pathplanner_;
+
  public:
   /**
    * @brief      Constructor
