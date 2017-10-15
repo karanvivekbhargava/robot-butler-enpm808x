@@ -15,9 +15,12 @@
 #ifndef CAMERAMODULE_HPP_
 #define CAMERAMODULE_HPP_
 
+#include <opencv2/opencv.hpp>
+#include <math.h>
 #include <iostream>
 #include <vector>
-#include <opencv2/opencv.hpp>
+
+#define PI 3.14159265
 
 /**
  * @brief      Class for camera module.
@@ -25,8 +28,9 @@
 class CameraModule {
  private:
   cv::Mat inputImage_, intermediateImage_, warpedImage_;
-  bool diagnostic_;
+  bool diagnostic_ = false;
   std::vector<float> outputValues_;
+
  public:
   /**
    * @brief      Constructor
