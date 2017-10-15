@@ -15,16 +15,19 @@
 #ifndef LIDARMODULE_HPP_
 #define LIDARMODULE_HPP_
 
+#include <math.h>
 #include <iostream>
 #include <vector>
+#include <string>
 
 /**
  * @brief      Class for lidar module.
  */
 class LidarModule {
  private:
-  bool diagnostic_;
+  bool diagnostic_ = false;
   std::vector<std::vector<float>> inputPts_, flattenedPts_;
+
  public:
   /**
    * @brief      Constructor
