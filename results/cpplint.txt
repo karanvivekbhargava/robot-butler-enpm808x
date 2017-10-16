@@ -1,0 +1,18 @@
+Done processing ./include/LidarModule.hpp
+Done processing ./include/SensorFusionModule.hpp
+Done processing ./include/PathPlanningModule.hpp
+Done processing ./include/Robot.hpp
+Done processing ./include/CameraModule.hpp
+Done processing ./test/main.cpp
+Done processing ./test/LidarTest.cpp
+Done processing ./test/SensorFusionTest.cpp
+Done processing ./test/PathPlanningTest.cpp
+Done processing ./test/CameraTest.cpp
+Done processing ./app/PathPlanningModule.cpp
+Done processing ./app/LidarModule.cpp
+Done processing ./app/main.cpp
+Done processing ./app/SensorFusionModule.cpp
+Done processing ./app/Robot.cpp
+Done processing ./app/CameraModule.cpp
+Total errors found: 0
+

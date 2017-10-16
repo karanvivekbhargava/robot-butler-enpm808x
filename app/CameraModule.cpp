@@ -22,10 +22,6 @@ CameraModule::CameraModule() {
   diagnostic_ = true;  // Default to true value
   // Read the file
   cv::Mat image = cv::imread("../data/image_left.jpg", cv::IMREAD_COLOR);
-  // if(image.empty()) {  // Check if image is empty
-  //   std::cout <<  "Could not open or find the image" << std::endl;
-  //   diagnostic_ = false;
-  // }
   // Resize the image to 360x480, since its too large
   cv::Mat dst = cv::Mat::zeros(360, 480, image.type());
   cv::resize(image, dst, dst.size(), 0, 0, cv::INTER_AREA);
@@ -113,7 +109,8 @@ void CameraModule::warpAndBinarize() {
   float increment = static_cast<float>(degree)/static_cast<float>(n-1);
   float start_angle = 90.0 - degree/2.0;
   std::vector<float> angles;
-  for (int i=0; i < n; i++) {
+
+  for (int i = 0 ; i < n ; i++) {
     angles.push_back(start_angle + static_cast<float>(i)*increment);
   }
 
@@ -123,10 +120,12 @@ void CameraModule::warpAndBinarize() {
 
   // Iterate over the lines to find eucledean distances
   std::vector<float> dist;
+  // Use normal iterator since we are iterating over pixel location
   for (int i = 0 ; i < n ; i++) {
     float xend = 0, yend = 0;
     // Find intersection between the lines of the image frame
     float m = tan(angles[i]*PI/180.0);
+    // Handle very low values of the slope
     if (abs(m) < 0.0001) {
       if (m <= 0) {
         m = -0.0001;
@@ -163,10 +162,6 @@ void CameraModule::warpAndBinarize() {
           break;
         }
       }
-      // else {
-      //   std::cout << "Out of bounds" << std::endl;
-      //   break;
-      // }
     }
 
     // Calculate the eucledian distances
@@ -175,34 +170,15 @@ void CameraModule::warpAndBinarize() {
       d = 10000;
     }
     dist.push_back(d);
-    // cv::line(intermediateImage_, cv::Point(x0, y0),
-    //   cv::Point(xend, yend),
-    //   cv::Scalar(255, 0, 0),
-    //   1,
-    //   cv::LINE_8, 0);
   }
 
   // Calculate probabilities from the distances
   float var = 100000;
   float mean = 0;
-  for (int i=0; i < n; i++) {
-    float p =  exp(-pow((dist[i]-mean), 2.0)/(2.0*var));  // Simple Gaussian
+  for (auto i : dist) {
+    float p =  exp(-pow((i-mean), 2.0)/(2.0*var));  // Simple Gaussian
     outputValues_.push_back(p);
   }
-
-  // // Display Probabilities
-  // std::cout << "Probabilities: ";
-  // for (int i = 0 ; i < n; i++) {
-  //   std::cout << outputValues_[i] << ", ";
-  // }
-  // std::cout << std::endl;
-
-  // // For Debugging
-  // cv::namedWindow( "Display window",
-  //   cv::WINDOW_AUTOSIZE );  // Create a window for display.
-  // cv::imshow( "Display window",
-  //   intermediateImage_);  / Show our image inside it.
-  // cv::waitKey(0);
 }
 
 /**

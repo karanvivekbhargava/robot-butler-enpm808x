@@ -21,6 +21,7 @@
  */
 LidarModule::LidarModule() {
   std::string str = "left";  // Dummy data for the image_left.png
+  // Loads a set of points
   if (str == "left") {
     std::vector<std::vector<float>> input;
     for (int i = 0; i < 6; i++) {
@@ -66,6 +67,7 @@ bool LidarModule::getDiagnostic() {
  * @brief      Project the points onto the ground
  */
 void LidarModule::flatten() {
+  // Remove the third coordinate to project it onto the ground
   for (auto i : inputPts_) {
     std::vector<float> p;
     for (int j = 0; j < 2; j++) {
@@ -73,14 +75,6 @@ void LidarModule::flatten() {
     }
     flattenedPts_.push_back(p);
   }
-
-  // // For debugging purposes
-  // for (auto i: flattenedPts_) {
-  //   for (auto j: i) {
-  //     std::cout << j << ", ";
-  //   }
-  //   std::cout << std::endl;
-  // }
 }
 
 /**
@@ -89,7 +83,9 @@ void LidarModule::flatten() {
  * @return     The probabilities for heading directions.
  */
 std::vector<float> LidarModule::computeProbabilities() {
+  // Flatten the points
   flatten();
+
   // Calculate the eucledian distances
   std::vector<float> dist;
   for (auto i : flattenedPts_) {
@@ -104,16 +100,11 @@ std::vector<float> LidarModule::computeProbabilities() {
   std::vector<float> outputValues;
   float var = 10;
   float mean = 0;
-  for (unsigned int i=0; i < flattenedPts_.size(); i++) {
-    float p =  exp(-pow((dist[i]-mean), 2.0)/(2.0*var));  // Use a gaussian
+  for (auto i : dist) {
+    float p =  exp(-pow((i-mean), 2.0)/(2.0*var));  // Use a gaussian
     outputValues.push_back(p);
   }
 
-  // // Display Probabilities
-  // std::cout << "Probabilities: ";
-  // for (int i = 0 ; i < flattenedPts_.size(); i++) {
-  //   std::cout << outputValues[i] << ", ";
-  // }
-  // std::cout << std::endl;
+  // Return the output probabilities
   return outputValues;
 }

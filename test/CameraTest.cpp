@@ -16,6 +16,9 @@
 #include <vector>
 #include "CameraModule.hpp"
 
+/**
+ * @brief      Class for camera test.
+ */
 class CameraTest : public ::testing::Test {
  protected:
     CameraModule cam;  // Create an object to be used in the tests
@@ -46,8 +49,10 @@ TEST_F(CameraTest, DiagnosticsCheck) {
  * @param[in]  ComputeProbabilitiesCheck  Name of the test
  */
 TEST_F(CameraTest, ComputeProbabilitiesCheck) {
+  // Initialize the probabilities
   std::vector<float> p = cam.computeProbabilities();
   std::vector<float> ref = {0, 0.700105, 0, 0, 0, 0};
+  // Compare the values
   for (unsigned int i = 0; i < p.size(); i++) {
     EXPECT_NEAR(p[i], ref[i], 0.0001);
   }

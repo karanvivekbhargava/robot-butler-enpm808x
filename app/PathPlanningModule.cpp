@@ -34,14 +34,7 @@ PathPlanningModule::~PathPlanningModule() {}
  * @param[in]  input  The input
  */
 void PathPlanningModule::setHeadingDirection(int input) {
-  // Check whether direction is valid
-  if ((input >= 0) && (input < 6)) {
-    currentHeadingDirection_ = input;  // Set the direction
-  }
-  //  else {
-  //  std::cout << "[ERROR] Invalid heading direction has been passed."
-  //    << std::endl;
-  // }
+  currentHeadingDirection_ = input;  // Set the direction
 }
 
 /**

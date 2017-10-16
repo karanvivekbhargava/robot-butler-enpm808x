@@ -53,6 +53,7 @@ void SensorFusionModule::setImageProbabilities(std::vector<float> input) {
 std::vector<float> SensorFusionModule::fuseData() {
   // Choose higher of both the probabilities and return a fused probability
   std::vector<float> fuse;
+
   for (unsigned int i = 0; i < imageProbabilities_.size(); i++) {
     if (imageProbabilities_[i] > lidarProbabilities_[i]) {
       fuse.push_back(imageProbabilities_[i]);

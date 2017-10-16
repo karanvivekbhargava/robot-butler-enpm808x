@@ -4,6 +4,7 @@
 <img src="https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x.svg?branch=master">
 </a>
 <a href='https://coveralls.io/github/karanvivekbhargava/robot-butler-enpm808x?branch=master'><img src='https://coveralls.io/repos/github/karanvivekbhargava/robot-butler-enpm808x/badge.svg?branch=master'/></a>
+<a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-yellow.svg'/></a>
 </p>
 
 ---
