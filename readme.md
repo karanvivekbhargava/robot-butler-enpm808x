@@ -4,17 +4,17 @@
 <img src="https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x.svg?branch=master">
 </a>
 <a href='https://coveralls.io/github/karanvivekbhargava/robot-butler-enpm808x?branch=master'><img src='https://coveralls.io/repos/github/karanvivekbhargava/robot-butler-enpm808x/badge.svg?branch=master'/></a>
-<a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-yellow.svg'/></a>
+<a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-brightgreen.svg'/></a>
 </p>
 
----
 <p align="center">
 <img src="https://cdn.andnowuknow.com/mainStoryImage/robot_butler_aug_2014_banner.jpg">
+Reference for image: <a href='http://www.savioke.com/'>link</a>
 </p>
 
 ## Robot Overview
 
-The Butler product by Acme Robotics is one of its flagship products. It performs best for an environment where things are to be transported to and fro from one area to another. Equipped with a 16MP camera and the best of class custom lidar sensor, its our best offering. The butler has intelligent algorithms running under its hood which allow it to percieve its environment by using these sensors. This allows the butler to avoid hitting obstacles and helps it serve you better.
+The Butler product by Acme Robotics is one of its flagship products. It performs best for an environment where things are to be transported to and fro from one area to another. Equipped with a 16MP camera and the best of class custom lidar sensor, its the best offering one can hope for. The butler has intelligent algorithms running under its hood which allow it to percieve its environment by using these sensors. This allows the butler to avoid hitting obstacles and helps it serve you better.
 
 ## New Feature List
 We tirelessly work on our robots so that you don't have to. Our new offerings in software are included below.
@@ -23,29 +23,90 @@ We tirelessly work on our robots so that you don't have to. Our new offerings in
 * Advanced data fusion algorithms: Our robots are cool but don't be fooled by their innocent appearance, they work super hard on the inside to crunch numbers faster than ever.
 * Path Planning: Using our custom sensors and the fusion technique, we can better plan the paths to avoid obstacles
 
+---
 ## The Camera
 The butler has a 16MP front facing camera. Its camera module consists of an FPGA which can perform custom algorithms at a mind boggling pace. Once the input image arrives, the module does a perspective transform on it. This gives us a birds eye view which is then passed to a thresholder. The binarized image from the thresholder is then used to calculate the probabilities of hitting the nearby obstacles. We use a gaussian probability distribution to compute the same.
+
+The images below show how the camera module is manupulating the data to translate it into a probability. The left image is the input, the center image is the perspective warped image and the right image is the thresholded image after warping. After this I'm checking the distances to obstacles with different headding directions. I can use these distances to obtain probabilties using a gaussian distribution.
+<p align="center">
+<img src = "data/output/1_original_resized.png" width="270" height="200">
+<img src = "data/output/3_output_warped.png" width="270" height="200">
+<img src = "data/output/4_output_warped_thresholded.png" width="270" height="200">
+</p>
 
 ## The Lidar
 The lidar gives a three dimensional point cloud representation of its surroundings. It uses this information and 'flattens' it out. This results in all the points being in some eucledean plane and the robot being the origin. It computes the distances from the obstacles and returns gaussian probabilitites to all the possible heading directions of the robot.
 
+Example: Consider that we have a point from the point cloud as below. PS: The points are preprocessed to be in the heading directions that we are going to consider.
+```
+p = (1, 2, 3)
+```
+The points will be flattened at first, this results in the representation of the points on the ground (euclidean plane).
+```
+p_flattened = (1, 2)
+```
+We will then compute the distances of the points from the origin (this is where the robot will be at all times)
+```
+d = sqrt(1^2 + 2^2)
+```
+We then turn these distances into the probabilities of hitting an obstacle by
+```
+Probability = C*e^((d-mean)/(2*variance))
+```
+Where C is a normalization constant, mean is 0 and variance is tuned according to the data. The lidar outputs these probabilites.
+
 ## Sensor Fusion
 After the camera and lidar do the hard work of putting the information in a sensible format, the sensor fusion module takes the two readings and selects the higher probability of the two, for each heading direction. Although this might result in some noisy outputs, it gives a high probability of avoiding obstacles.
+
+Example: If say we have the incoming probabilities given below where the probabilities correspond to heading directions -30, -20, -10, 10, 20, 30 degrees from current heading direction.
+```
+P_image = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
+P_lidar = [0.6, 0.5, 0.4, 0.3, 0.2, 0,1];
+```
+Fused probability is given by
+```
+P_fusion = max(P_image, P_lidar)
+```
+Which gives us,
+```
+P_fusion = [0.6, 0.5, 0.4, 0.4, 0.5, 0.6];
+```
 
 ## Path Planning
 The path planner uses the fused sensor output to determine what should be the next heading direction. This is done by selecting the heading direction which results in the least probability of hitting any obstacles.
 
+Example: If the incoming fused probabilities are as given below
+```
+P_fused = [0.1, 0.2, 0.0, 0.01, 0.1, 0,3];
+```
+Then the path planner can be written mathematically as
+```
+direction = argmin_x( P_fused[x] )
+```
+Then the output of the path planner would be
+```
+direction = 2 (index of 0.0)
+```
+
+## The Robot
+The robot is the class which uses all the other modules and creates instances of a camera, lidar, sensor fusion module and path planning module. It then uses the modules to run.
+<p align="center">
+<img src = "UML/initial/Activity_Diagram.jpg">
+</p>
+
+---
 ## SIP Overview
 Click this link to view the product backlog, time sheets, defect logs and release backlog - [link](https://docs.google.com/spreadsheets/d/1WOvV6iL4gGOF8Qacwj2R3Lom71wziKXEf_UEhdGfOuY/edit?usp=sharing)
 
 Care has been taken to design the SIP tasks such that they have a direct relation to the previous tasks. This helps in better time estimation. For instance, the change in time taken for stub implementation is proportional to the change in time taken to implement the methods. This gave me a good idea to rethink about the allotment of time for future tasks.
 
+---
 ## Overview
 
-Simple starter C++ project with:
-
-- cmake
-- googletest
+The butler software stack has the following dependencies:
+* cmake
+* googletest
+* opencv
 
 ## Standard install via command-line
 ```
@@ -76,7 +137,7 @@ In your Eclipse workspace directory (or create a new one), checkout the repo (an
 ```
 mkdir -p ~/workspace
 cd ~/workspace
-git clone --recursive https://github.com/dpiet/cpp-boilerplate
+git clone --recursive https://github.com/karanvivekbhargava/robot-butler-enpm808x
 ```
 
 In your work directory, use cmake to create an Eclipse project for an [out-of-source build] of cpp-boilerplate
@@ -160,4 +221,4 @@ perspetive view (or Windows->Perspective->Open Perspective->C/C++).
 
 - Git
 
-    It is possible to manage version control through Eclipse and the git plugin, but it typically requires creating another project. If you're interested in this, try it out yourself and contact me on Canvas.
+    It is possible to manage version control through Eclipse and the git plugin, but it typically requires creating another project. If you're interested in this, try it out yourself.
