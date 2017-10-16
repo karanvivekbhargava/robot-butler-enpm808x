@@ -1,10 +1,43 @@
-# C++ Boilerplate
-[![Build Status](https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x.svg?branch=master)](https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x)
-[![Coverage Status](https://coveralls.io/repos/github/karanvivekbhargava/robot-butler-enpm808x/badge.svg?branch=master)](https://coveralls.io/github/karanvivekbhargava/robot-butler-enpm808x?branch=master)
+<h1 align=center> ENPM808X - Robot Butler </h1>
+<p align="center">
+<a href="https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x">
+<img src="https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x.svg?branch=master">
+</a>
+<a href='https://coveralls.io/github/karanvivekbhargava/robot-butler-enpm808x?branch=master'><img src='https://coveralls.io/repos/github/karanvivekbhargava/robot-butler-enpm808x/badge.svg?branch=master'/></a>
+</p>
+
 ---
+<p align="center">
+<img src="https://cdn.andnowuknow.com/mainStoryImage/robot_butler_aug_2014_banner.jpg">
+</p>
+
+## Robot Overview
+
+The Butler product by Acme Robotics is one of its flagship products. It performs best for an environment where things are to be transported to and fro from one area to another. Equipped with a 16MP camera and the best of class custom lidar sensor, its our best offering. The butler has intelligent algorithms running under its hood which allow it to percieve its environment by using these sensors. This allows the butler to avoid hitting obstacles and helps it serve you better.
+
+## New Feature List
+We tirelessly work on our robots so that you don't have to. Our new offerings in software are included below.
+* Estimation of object distances using camera data: While other companies are defining state of the art algorithms on the road, we do it in your workplace. Making our robots 30% less likely to crash into objects than our competitors.
+* Using lidar to map your environment: The butler records its surroundings in 3D so that it can see obstacles before they hit it.
+* Advanced data fusion algorithms: Our robots are cool but don't be fooled by their innocent appearance, they work super hard on the inside to crunch numbers faster than ever.
+* Path Planning: Using our custom sensors and the fusion technique, we can better plan the paths to avoid obstacles
+
+## The Camera
+The butler has a 16MP front facing camera. Its camera module consists of an FPGA which can perform custom algorithms at a mind boggling pace. Once the input image arrives, the module does a perspective transform on it. This gives us a birds eye view which is then passed to a thresholder. The binarized image from the thresholder is then used to calculate the probabilities of hitting the nearby obstacles. We use a gaussian probability distribution to compute the same.
+
+## The Lidar
+The lidar gives a three dimensional point cloud representation of its surroundings. It uses this information and 'flattens' it out. This results in all the points being in some eucledean plane and the robot being the origin. It computes the distances from the obstacles and returns gaussian probabilitites to all the possible heading directions of the robot.
+
+## Sensor Fusion
+After the camera and lidar do the hard work of putting the information in a sensible format, the sensor fusion module takes the two readings and selects the higher probability of the two, for each heading direction. Although this might result in some noisy outputs, it gives a high probability of avoiding obstacles.
+
+## Path Planning
+The path planner uses the fused sensor output to determine what should be the next heading direction. This is done by selecting the heading direction which results in the least probability of hitting any obstacles.
+
 ## SIP Overview
----
 Click this link to view the product backlog, time sheets, defect logs and release backlog - [link](https://docs.google.com/spreadsheets/d/1WOvV6iL4gGOF8Qacwj2R3Lom71wziKXEf_UEhdGfOuY/edit?usp=sharing)
+
+Care has been taken to design the SIP tasks such that they have a direct relation to the previous tasks. This helps in better time estimation. For instance, the change in time taken for stub implementation is proportional to the change in time taken to implement the methods. This gave me a good idea to rethink about the allotment of time for future tasks.
 
 ## Overview
 
@@ -15,7 +48,7 @@ Simple starter C++ project with:
 
 ## Standard install via command-line
 ```
-git clone --recursive https://github.com/dpiet/cpp-boilerplate
+git clone --recursive https://github.com/karanvivekbhargava/robot-butler-enpm808x
 cd <path to repository>
 mkdir build
 cd build
