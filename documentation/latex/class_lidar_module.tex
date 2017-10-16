@@ -1,0 +1,122 @@
+\hypertarget{class_lidar_module}{}\section{Lidar\+Module Class Reference}
+\label{class_lidar_module}\index{Lidar\+Module@{Lidar\+Module}}
+
+
+Class for lidar module.  
+
+
+
+
+{\ttfamily \#include $<$Lidar\+Module.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_lidar_module_aaebef565e883b9254ab61d4ba45a19ec}{Lidar\+Module} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_lidar_module_a9f76d762ad58356a109e6ca68e9ab34c}{$\sim$\+Lidar\+Module} ()\hypertarget{class_lidar_module_a9f76d762ad58356a109e6ca68e9ab34c}{}\label{class_lidar_module_a9f76d762ad58356a109e6ca68e9ab34c}
+
+\begin{DoxyCompactList}\small\item\em Destroys the object. \end{DoxyCompactList}\item 
+void \hyperlink{class_lidar_module_a05318b0c70f04e9f7e9ec7896c3590cf}{set\+Input} (std\+::vector$<$ std\+::vector$<$ float $>$$>$ input)
+\begin{DoxyCompactList}\small\item\em Sets the input. \end{DoxyCompactList}\item 
+bool \hyperlink{class_lidar_module_a60f2786b71f6baa0756a2355eb1c908a}{get\+Diagnostic} ()
+\begin{DoxyCompactList}\small\item\em Gets the diagnostic. \end{DoxyCompactList}\item 
+void \hyperlink{class_lidar_module_a9e968b3f52665b2ec1aaae41122b4d0e}{flatten} ()\hypertarget{class_lidar_module_a9e968b3f52665b2ec1aaae41122b4d0e}{}\label{class_lidar_module_a9e968b3f52665b2ec1aaae41122b4d0e}
+
+\begin{DoxyCompactList}\small\item\em Project the points onto the ground. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \hyperlink{class_lidar_module_aeb655e2c122dc36715f013b92689bda6}{compute\+Probabilities} ()
+\begin{DoxyCompactList}\small\item\em Calculates the probabilities. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for lidar module. 
+
+Definition at line 26 of file Lidar\+Module.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lidar\+Module@{Lidar\+Module}!Lidar\+Module@{Lidar\+Module}}
+\index{Lidar\+Module@{Lidar\+Module}!Lidar\+Module@{Lidar\+Module}}
+\subsubsection[{\texorpdfstring{Lidar\+Module()}{LidarModule()}}]{\setlength{\rightskip}{0pt plus 5cm}Lidar\+Module\+::\+Lidar\+Module (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_lidar_module_aaebef565e883b9254ab61d4ba45a19ec}{}\label{class_lidar_module_aaebef565e883b9254ab61d4ba45a19ec}
+
+
+Constructor. 
+
+Constructs the object. 
+
+Definition at line 22 of file Lidar\+Module.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Lidar\+Module@{Lidar\+Module}!compute\+Probabilities@{compute\+Probabilities}}
+\index{compute\+Probabilities@{compute\+Probabilities}!Lidar\+Module@{Lidar\+Module}}
+\subsubsection[{\texorpdfstring{compute\+Probabilities()}{computeProbabilities()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ float $>$ Lidar\+Module\+::compute\+Probabilities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_lidar_module_aeb655e2c122dc36715f013b92689bda6}{}\label{class_lidar_module_aeb655e2c122dc36715f013b92689bda6}
+
+
+Calculates the probabilities. 
+
+\begin{DoxyReturn}{Returns}
+The probabilities for heading directions. 
+\end{DoxyReturn}
+
+
+Definition at line 85 of file Lidar\+Module.\+cpp.
+
+\index{Lidar\+Module@{Lidar\+Module}!get\+Diagnostic@{get\+Diagnostic}}
+\index{get\+Diagnostic@{get\+Diagnostic}!Lidar\+Module@{Lidar\+Module}}
+\subsubsection[{\texorpdfstring{get\+Diagnostic()}{getDiagnostic()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Lidar\+Module\+::get\+Diagnostic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_lidar_module_a60f2786b71f6baa0756a2355eb1c908a}{}\label{class_lidar_module_a60f2786b71f6baa0756a2355eb1c908a}
+
+
+Gets the diagnostic. 
+
+\begin{DoxyReturn}{Returns}
+The diagnostic truth value. 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file Lidar\+Module.\+cpp.
+
+\index{Lidar\+Module@{Lidar\+Module}!set\+Input@{set\+Input}}
+\index{set\+Input@{set\+Input}!Lidar\+Module@{Lidar\+Module}}
+\subsubsection[{\texorpdfstring{set\+Input(std\+::vector$<$ std\+::vector$<$ float $>$$>$ input)}{setInput(std::vector< std::vector< float >> input)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lidar\+Module\+::set\+Input (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::vector$<$ float $>$$>$}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{class_lidar_module_a05318b0c70f04e9f7e9ec7896c3590cf}{}\label{class_lidar_module_a05318b0c70f04e9f7e9ec7896c3590cf}
+
+
+Sets the input. 
+
+Sets the input image.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & The input\\
+\hline
+\mbox{\tt in}  & {\em input} & The input image \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 53 of file Lidar\+Module.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_lidar_module_8hpp}{Lidar\+Module.\+hpp}\item 
+app/\hyperlink{_lidar_module_8cpp}{Lidar\+Module.\+cpp}\end{DoxyCompactItemize}

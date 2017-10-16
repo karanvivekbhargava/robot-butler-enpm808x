@@ -1,0 +1,137 @@
+\hypertarget{class_path_planning_module}{}\section{Path\+Planning\+Module Class Reference}
+\label{class_path_planning_module}\index{Path\+Planning\+Module@{Path\+Planning\+Module}}
+
+
+Class for path planning module.  
+
+
+
+
+{\ttfamily \#include $<$Path\+Planning\+Module.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_path_planning_module_a45510d19b199ab89cecc1bf6e8b252eb}{Path\+Planning\+Module} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_path_planning_module_acc73ccfa18e08a1771b72bb418d96258}{$\sim$\+Path\+Planning\+Module} ()\hypertarget{class_path_planning_module_acc73ccfa18e08a1771b72bb418d96258}{}\label{class_path_planning_module_acc73ccfa18e08a1771b72bb418d96258}
+
+\begin{DoxyCompactList}\small\item\em Destroys the object. \end{DoxyCompactList}\item 
+void \hyperlink{class_path_planning_module_ab44f3d8c24aa57a71ceac2eb71c09c2d}{set\+Heading\+Direction} (int input)
+\begin{DoxyCompactList}\small\item\em Sets the heading direction. \end{DoxyCompactList}\item 
+bool \hyperlink{class_path_planning_module_a19d31df2f1edafc25580c0c07151e014}{get\+Diagnostic} ()
+\begin{DoxyCompactList}\small\item\em Gets the diagnostic. \end{DoxyCompactList}\item 
+int \hyperlink{class_path_planning_module_a9aa558d9c088584cbaf37ecede8890b9}{get\+Heading\+Direction} ()
+\begin{DoxyCompactList}\small\item\em Gets the heading direction. \end{DoxyCompactList}\item 
+void \hyperlink{class_path_planning_module_ae760345016ddc0c7b9381f86240a6ddf}{modify\+Heading\+Direction} (std\+::vector$<$ float $>$ probabilities)
+\begin{DoxyCompactList}\small\item\em Modify the heading direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for path planning module. 
+
+Definition at line 25 of file Path\+Planning\+Module.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Path\+Planning\+Module@{Path\+Planning\+Module}!Path\+Planning\+Module@{Path\+Planning\+Module}}
+\index{Path\+Planning\+Module@{Path\+Planning\+Module}!Path\+Planning\+Module@{Path\+Planning\+Module}}
+\subsubsection[{\texorpdfstring{Path\+Planning\+Module()}{PathPlanningModule()}}]{\setlength{\rightskip}{0pt plus 5cm}Path\+Planning\+Module\+::\+Path\+Planning\+Module (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_path_planning_module_a45510d19b199ab89cecc1bf6e8b252eb}{}\label{class_path_planning_module_a45510d19b199ab89cecc1bf6e8b252eb}
+
+
+Constructor. 
+
+Constructs the object. 
+
+Definition at line 22 of file Path\+Planning\+Module.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Path\+Planning\+Module@{Path\+Planning\+Module}!get\+Diagnostic@{get\+Diagnostic}}
+\index{get\+Diagnostic@{get\+Diagnostic}!Path\+Planning\+Module@{Path\+Planning\+Module}}
+\subsubsection[{\texorpdfstring{get\+Diagnostic()}{getDiagnostic()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Path\+Planning\+Module\+::get\+Diagnostic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_path_planning_module_a19d31df2f1edafc25580c0c07151e014}{}\label{class_path_planning_module_a19d31df2f1edafc25580c0c07151e014}
+
+
+Gets the diagnostic. 
+
+\begin{DoxyReturn}{Returns}
+The diagnostic truth value. 
+\end{DoxyReturn}
+
+
+Definition at line 45 of file Path\+Planning\+Module.\+cpp.
+
+\index{Path\+Planning\+Module@{Path\+Planning\+Module}!get\+Heading\+Direction@{get\+Heading\+Direction}}
+\index{get\+Heading\+Direction@{get\+Heading\+Direction}!Path\+Planning\+Module@{Path\+Planning\+Module}}
+\subsubsection[{\texorpdfstring{get\+Heading\+Direction()}{getHeadingDirection()}}]{\setlength{\rightskip}{0pt plus 5cm}int Path\+Planning\+Module\+::get\+Heading\+Direction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_path_planning_module_a9aa558d9c088584cbaf37ecede8890b9}{}\label{class_path_planning_module_a9aa558d9c088584cbaf37ecede8890b9}
+
+
+Gets the heading direction. 
+
+\begin{DoxyReturn}{Returns}
+The heading direction. 
+\end{DoxyReturn}
+
+
+Definition at line 54 of file Path\+Planning\+Module.\+cpp.
+
+\index{Path\+Planning\+Module@{Path\+Planning\+Module}!modify\+Heading\+Direction@{modify\+Heading\+Direction}}
+\index{modify\+Heading\+Direction@{modify\+Heading\+Direction}!Path\+Planning\+Module@{Path\+Planning\+Module}}
+\subsubsection[{\texorpdfstring{modify\+Heading\+Direction(std\+::vector$<$ float $>$ probabilities)}{modifyHeadingDirection(std::vector< float > probabilities)}}]{\setlength{\rightskip}{0pt plus 5cm}void Path\+Planning\+Module\+::modify\+Heading\+Direction (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ float $>$}]{probabilities}
+\end{DoxyParamCaption}
+)}\hypertarget{class_path_planning_module_ae760345016ddc0c7b9381f86240a6ddf}{}\label{class_path_planning_module_ae760345016ddc0c7b9381f86240a6ddf}
+
+
+Modify the heading direction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em probabilities} & The probabilities \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file Path\+Planning\+Module.\+cpp.
+
+\index{Path\+Planning\+Module@{Path\+Planning\+Module}!set\+Heading\+Direction@{set\+Heading\+Direction}}
+\index{set\+Heading\+Direction@{set\+Heading\+Direction}!Path\+Planning\+Module@{Path\+Planning\+Module}}
+\subsubsection[{\texorpdfstring{set\+Heading\+Direction(int input)}{setHeadingDirection(int input)}}]{\setlength{\rightskip}{0pt plus 5cm}void Path\+Planning\+Module\+::set\+Heading\+Direction (
+\begin{DoxyParamCaption}
+\item[{int}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{class_path_planning_module_ab44f3d8c24aa57a71ceac2eb71c09c2d}{}\label{class_path_planning_module_ab44f3d8c24aa57a71ceac2eb71c09c2d}
+
+
+Sets the heading direction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & The input \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 36 of file Path\+Planning\+Module.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_path_planning_module_8hpp}{Path\+Planning\+Module.\+hpp}\item 
+app/\hyperlink{_path_planning_module_8cpp}{Path\+Planning\+Module.\+cpp}\end{DoxyCompactItemize}
