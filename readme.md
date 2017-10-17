@@ -189,3 +189,22 @@ After following the building instructions, run the command below
 ```
 ./test/cpp-test
 ```
+
+## How to generate documentation
+
+Although the repository contains the documentation, if you'd still like to generate it then follow the instructions below.
+
+```
+sudo apt-get install doxygen
+sudo apt-get install doxywizard
+doxywizard
+```
+
+Once doxywizard is open, select the workspace as the repository. Fill in the details as required and set the source code folder to the repository as well. Create a new folder in the repository and select that as the destination directory. Proceed with the default settings and generate the documentation.
+
+Alternatively, you can run
+
+```
+doxygen -g doxygenconfig
+doxygen doxygenconfig
+```
