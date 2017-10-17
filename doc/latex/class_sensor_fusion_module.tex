@@ -1,0 +1,125 @@
+\hypertarget{class_sensor_fusion_module}{}\section{Sensor\+Fusion\+Module Class Reference}
+\label{class_sensor_fusion_module}\index{Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}}
+
+
+Class for sensor fusion module.  
+
+
+
+
+{\ttfamily \#include $<$Sensor\+Fusion\+Module.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sensor_fusion_module_a197b81625100b2b15d339be6fc15c657}{Sensor\+Fusion\+Module} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_sensor_fusion_module_a771099181db2311c47a13b56b93819fb}{$\sim$\+Sensor\+Fusion\+Module} ()
+\begin{DoxyCompactList}\small\item\em Destroys the object. \end{DoxyCompactList}\item 
+void \hyperlink{class_sensor_fusion_module_aa1b418548d329fd79a498edfc476d2b2}{set\+Lidar\+Probabilities} (std\+::vector$<$ float $>$ input)
+\begin{DoxyCompactList}\small\item\em Sets the lidar probabilities. \end{DoxyCompactList}\item 
+void \hyperlink{class_sensor_fusion_module_af169a79d8e241ba090b13b079d173080}{set\+Image\+Probabilities} (std\+::vector$<$ float $>$ input)
+\begin{DoxyCompactList}\small\item\em Sets the image probabilities. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \hyperlink{class_sensor_fusion_module_a13d1756444b5d5e984aed678bed30103}{fuse\+Data} ()
+\begin{DoxyCompactList}\small\item\em Fuse the two sensor data. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sensor_fusion_module_a8bb7397254888c4204ceeb9540659d4a}{get\+Diagnostic} ()
+\begin{DoxyCompactList}\small\item\em Gets the diagnostic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for sensor fusion module. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}!Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}}
+\index{Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}!Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}}
+\subsubsection[{\texorpdfstring{Sensor\+Fusion\+Module()}{SensorFusionModule()}}]{\setlength{\rightskip}{0pt plus 5cm}Sensor\+Fusion\+Module\+::\+Sensor\+Fusion\+Module (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sensor_fusion_module_a197b81625100b2b15d339be6fc15c657}{}\label{class_sensor_fusion_module_a197b81625100b2b15d339be6fc15c657}
+
+
+Constructor. 
+
+Constructs the object. \index{Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}!````~Sensor\+Fusion\+Module@{$\sim$\+Sensor\+Fusion\+Module}}
+\index{````~Sensor\+Fusion\+Module@{$\sim$\+Sensor\+Fusion\+Module}!Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}}
+\subsubsection[{\texorpdfstring{$\sim$\+Sensor\+Fusion\+Module()}{~SensorFusionModule()}}]{\setlength{\rightskip}{0pt plus 5cm}Sensor\+Fusion\+Module\+::$\sim$\+Sensor\+Fusion\+Module (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sensor_fusion_module_a771099181db2311c47a13b56b93819fb}{}\label{class_sensor_fusion_module_a771099181db2311c47a13b56b93819fb}
+
+
+Destroys the object. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}!fuse\+Data@{fuse\+Data}}
+\index{fuse\+Data@{fuse\+Data}!Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}}
+\subsubsection[{\texorpdfstring{fuse\+Data()}{fuseData()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ float $>$ Sensor\+Fusion\+Module\+::fuse\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sensor_fusion_module_a13d1756444b5d5e984aed678bed30103}{}\label{class_sensor_fusion_module_a13d1756444b5d5e984aed678bed30103}
+
+
+Fuse the two sensor data. 
+
+\begin{DoxyReturn}{Returns}
+Fused sensor probabilities 
+\end{DoxyReturn}
+\index{Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}!get\+Diagnostic@{get\+Diagnostic}}
+\index{get\+Diagnostic@{get\+Diagnostic}!Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}}
+\subsubsection[{\texorpdfstring{get\+Diagnostic()}{getDiagnostic()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sensor\+Fusion\+Module\+::get\+Diagnostic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sensor_fusion_module_a8bb7397254888c4204ceeb9540659d4a}{}\label{class_sensor_fusion_module_a8bb7397254888c4204ceeb9540659d4a}
+
+
+Gets the diagnostic. 
+
+\begin{DoxyReturn}{Returns}
+The diagnostic truth value. 
+\end{DoxyReturn}
+\index{Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}!set\+Image\+Probabilities@{set\+Image\+Probabilities}}
+\index{set\+Image\+Probabilities@{set\+Image\+Probabilities}!Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}}
+\subsubsection[{\texorpdfstring{set\+Image\+Probabilities(std\+::vector$<$ float $>$ input)}{setImageProbabilities(std::vector< float > input)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sensor\+Fusion\+Module\+::set\+Image\+Probabilities (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ float $>$}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sensor_fusion_module_af169a79d8e241ba090b13b079d173080}{}\label{class_sensor_fusion_module_af169a79d8e241ba090b13b079d173080}
+
+
+Sets the image probabilities. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & The input \\
+\hline
+\end{DoxyParams}
+\index{Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}!set\+Lidar\+Probabilities@{set\+Lidar\+Probabilities}}
+\index{set\+Lidar\+Probabilities@{set\+Lidar\+Probabilities}!Sensor\+Fusion\+Module@{Sensor\+Fusion\+Module}}
+\subsubsection[{\texorpdfstring{set\+Lidar\+Probabilities(std\+::vector$<$ float $>$ input)}{setLidarProbabilities(std::vector< float > input)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sensor\+Fusion\+Module\+::set\+Lidar\+Probabilities (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ float $>$}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sensor_fusion_module_aa1b418548d329fd79a498edfc476d2b2}{}\label{class_sensor_fusion_module_aa1b418548d329fd79a498edfc476d2b2}
+
+
+Sets the lidar probabilities. 
+
+Sets the heading direction.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & The input \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_sensor_fusion_module_8hpp}{Sensor\+Fusion\+Module.\+hpp}\item 
+app/\hyperlink{_sensor_fusion_module_8cpp}{Sensor\+Fusion\+Module.\+cpp}\end{DoxyCompactItemize}

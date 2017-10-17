@@ -1,0 +1,228 @@
+\section*{E\+N\+P\+M808X -\/ \hyperlink{class_robot}{Robot} Butler }
+
+\href{https://travis-ci.org/karanvivekbhargava/robot-butler-enpm808x}{\tt } \href{https://coveralls.io/github/karanvivekbhargava/robot-butler-enpm808x?branch=master}{\tt } \href{https://opensource.org/licenses/MIT}{\tt } 
+
+ Reference for image\+: \href{http://www.savioke.com/}{\tt link} 
+
+\subsection*{Project Overview}
+
+The Butler product by Acme Robotics is one of its flagship products. It performs best for an environment where things are to be transported to and fro from one area to another. Equipped with a 16\+MP camera and the best of class custom lidar sensor, its the best offering one can hope for. The butler has intelligent algorithms running under its hood which allow it to percieve its environment by using these sensors. This allows the butler to avoid hitting obstacles and helps it serve you better.
+
+\subsection*{New Feature List}
+
+The new offerings in software are included below.
+\begin{DoxyItemize}
+\item Estimation of object distances using camera data\+: While other companies are defining state of the art algorithms on the road, the butler does it indoors. Making the robots less likely to crash into objects than the competitors.
+\item Using lidar to map your environment\+: The butler records its surroundings in 3D so that it can see obstacles before they hit it.
+\item Advanced data fusion algorithms\+: This robot is cool but don\textquotesingle{}t be fooled by its innocent appearance, it works super hard on the inside to crunch numbers faster than ever. Combining the data from both the sensors, it gets a better estimate on how it should move.
+\item Path Planning\+: Using our custom sensors and the fusion technique, the butler can plan the path better to avoid obstacles 
+
+ \subsection*{The Camera}
+\end{DoxyItemize}
+
+The butler has a 16\+MP front facing camera. Its camera module consists of an F\+P\+GA which can perform custom algorithms at a mind boggling pace. Once the input image arrives, the module does a perspective transform on it. This gives us a birds eye view which is then passed to a thresholder. The binarized image from the thresholder is then used to calculate the probabilities of hitting the nearby obstacles. We use a gaussian probability distribution to compute the same.
+
+The images below show how the camera module is manupulating the data to translate it into a probability. The left image is the input, the center image is the perspective warped image and the right image is the thresholded image after warping. After this I\textquotesingle{}m checking the distances to obstacles with different headding directions. I can use these distances to obtain probabilties using a gaussian distribution. 
+
+   
+
+\subsection*{The Lidar}
+
+The lidar gives a three dimensional point cloud representation of its surroundings. It uses this information and \textquotesingle{}flattens\textquotesingle{} it out. This results in all the points being in some eucledean plane and the robot being the origin. It computes the distances from the obstacles and returns gaussian probabilitites to all the possible heading directions of the robot.
+
+Example\+: Consider that we have a point from the point cloud as below. PS\+: The points are preprocessed to be in the heading directions that we are going to consider. 
+\begin{DoxyCode}
+1 p = (1, 2, 3)
+\end{DoxyCode}
+ The points will be flattened at first, this results in the representation of the points on the ground (euclidean plane). 
+\begin{DoxyCode}
+1 p\_flattened = (1, 2)
+\end{DoxyCode}
+ We will then compute the distances of the points from the origin (this is where the robot will be at all times) 
+\begin{DoxyCode}
+1 d = sqrt(1^2 + 2^2)
+\end{DoxyCode}
+ We then turn these distances into the probabilities of hitting an obstacle by 
+\begin{DoxyCode}
+1 Probability = C*e^((d-mean)/(2*variance))
+\end{DoxyCode}
+ Where C is a normalization constant, mean is 0 and variance is tuned according to the data. The lidar outputs these probabilites.
+
+\subsection*{Sensor Fusion}
+
+After the camera and lidar do the hard work of putting the information in a sensible format, the sensor fusion module takes the two readings and selects the higher probability of the two, for each heading direction. Although this might result in some noisy outputs, it avoids obstacles effectively.
+
+Example\+: If say we have the incoming probabilities given below where the probabilities correspond to heading directions -\/50, -\/30, -\/10, 10, 30, 50 degrees from current heading direction. 
+\begin{DoxyCode}
+1 P\_image = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
+2 P\_lidar = [0.6, 0.5, 0.4, 0.3, 0.2, 0,1];
+\end{DoxyCode}
+ Fused probability is given by 
+\begin{DoxyCode}
+1 P\_fusion = max(P\_image, P\_lidar)
+\end{DoxyCode}
+ Which gives us, 
+\begin{DoxyCode}
+1 P\_fusion = [0.6, 0.5, 0.4, 0.4, 0.5, 0.6];
+\end{DoxyCode}
+
+
+\subsection*{Path Planning}
+
+The path planner uses the fused sensor output to determine what should be the next heading direction. This is done by selecting the heading direction which results in the least probability of hitting any obstacles.
+
+Example\+: If the incoming fused probabilities are as given below 
+\begin{DoxyCode}
+1 P\_fused = [0.1, 0.2, 0.0, 0.01, 0.1, 0,3];
+\end{DoxyCode}
+ Then the path planner can be written mathematically as 
+\begin{DoxyCode}
+1 direction = argmin\_x( P\_fused[x] )
+\end{DoxyCode}
+ Then the output of the path planner would be 
+\begin{DoxyCode}
+1 direction = 2 (index of 0.0)
+\end{DoxyCode}
+
+
+The robot later converts this direction into an angle by using
+
+
+\begin{DoxyCode}
+1 angle = (direction - 2.5)*20.0;
+\end{DoxyCode}
+
+
+\subsection*{The \hyperlink{class_robot}{Robot}}
+
+The robot is the class which uses all the other modules and creates instances of a camera, lidar, sensor fusion module and path planning module. It then uses the modules to run. 
+
+ 
+
+
+
+ \subsection*{Results}
+
+The software takes the camera image as well as the processed point cloud. I\textquotesingle{}ve configured the robot for three pictures by generating the respective lidar inputs.
+
+Following are the results
+\begin{DoxyEnumerate}
+\item Obstacle on the left 
+\end{DoxyEnumerate}
+
+ 
+
+
+\begin{DoxyCode}
+1 Output:
+2 [OK] Diagnostics are fine.
+3 Rotate robot counter clockwise by -10
+\end{DoxyCode}
+
+
+
+\begin{DoxyEnumerate}
+\item Obstacle in the center 
+\end{DoxyEnumerate}
+
+ 
+
+
+\begin{DoxyCode}
+1 Output:
+2 [OK] Diagnostics are fine.
+3 Rotate robot counter clockwise by 50
+\end{DoxyCode}
+
+
+
+\begin{DoxyEnumerate}
+\item Obstacle on the right 
+\end{DoxyEnumerate}
+
+ 
+
+
+\begin{DoxyCode}
+1 Output:
+2 [OK] Diagnostics are fine.
+3 Rotate robot counter clockwise by -50
+\end{DoxyCode}
+ 
+
+ \subsection*{Solo Iterative Process Overview}
+
+Click this link to view the product backlog, time sheets, defect logs and release backlog -\/ \href{https://docs.google.com/spreadsheets/d/1WOvV6iL4gGOF8Qacwj2R3Lom71wziKXEf_UEhdGfOuY/edit?usp=sharing}{\tt link}
+
+Care has been taken to design the S\+IP tasks such that they have a direct relation to the previous tasks. This helps in better time estimation. For instance, the change in time taken for stub implementation is proportional to the change in time taken to implement the methods. This gave me a good idea to rethink about the allotment of time for future tasks. 
+
+ \subsection*{Dependencies}
+
+The butler software stack has the following dependencies\+:
+\begin{DoxyItemize}
+\item cmake
+\item googletest
+\item opencv
+\end{DoxyItemize}
+
+To install opencv, follow the instructions on \href{https://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html}{\tt link}
+
+\#\# How to build -\/ standard install via command-\/line 
+\begin{DoxyCode}
+1 git clone --recursive https://github.com/karanvivekbhargava/robot-butler-enpm808x
+2 cd <path to repository>
+3 mkdir build
+4 cd build
+5 cmake ..
+6 make
+\end{DoxyCode}
+
+
+\subsection*{How to run demo}
+
+After following the installation instructions above, you can try three different images from the data folder by specifying the argument with the program
+
+To run for image\+\_\+left.\+jpg, kindly enter the function below 
+\begin{DoxyCode}
+1 ./app/shell-app left
+\end{DoxyCode}
+ To run for image\+\_\+center.\+jpg, kindly enter the function below 
+\begin{DoxyCode}
+1 ./app/shell-app center
+\end{DoxyCode}
+ To run for image\+\_\+right.\+jpg, kindly enter the function below 
+\begin{DoxyCode}
+1 ./app/shell-app right
+\end{DoxyCode}
+
+
+\subsection*{How to run tests}
+
+After following the building instructions, run the command below 
+\begin{DoxyCode}
+1 ./test/cpp-test
+\end{DoxyCode}
+
+
+\subsection*{How to generate documentation}
+
+Although the repository contains the documentation, if you\textquotesingle{}d still like to generate it then follow the instructions below.
+
+
+\begin{DoxyCode}
+1 sudo apt-get install doxygen
+2 sudo apt-get install doxywizard
+3 doxywizard
+\end{DoxyCode}
+
+
+Once doxywizard is open, select the workspace as the repository. Fill in the details as required and set the source code folder to the repository as well. Create a new folder in the repository and select that as the destination directory. Proceed with the default settings and generate the documentation.
+
+Alternatively, you can run
+
+
+\begin{DoxyCode}
+1 doxygen -g doxygenconfig
+2 doxygen doxygenconfig
+\end{DoxyCode}
+ 

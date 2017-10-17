@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$class_camera_test.html" title="Class for camera test. " alt="" coords="118,5,213,32"/>
-<area shape="rect" id="node3" href="$class_lidar_test.html" title="Class for lidar test. " alt="" coords="127,56,203,83"/>
-<area shape="rect" id="node4" href="$class_path_planning_test.html" title="Class for path planning test. " alt="" coords="103,107,228,133"/>
-<area shape="rect" id="node5" href="$class_sensor_fusion_test.html" title="Class for sensor fusion test. " alt="" coords="101,157,229,184"/>
-</map>
