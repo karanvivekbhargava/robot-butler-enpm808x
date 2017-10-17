@@ -12,16 +12,16 @@
 Reference for image: <a href='http://www.savioke.com/'>link</a>
 </p>
 
-## Robot Overview
+## Project Overview
 
 The Butler product by Acme Robotics is one of its flagship products. It performs best for an environment where things are to be transported to and fro from one area to another. Equipped with a 16MP camera and the best of class custom lidar sensor, its the best offering one can hope for. The butler has intelligent algorithms running under its hood which allow it to percieve its environment by using these sensors. This allows the butler to avoid hitting obstacles and helps it serve you better.
 
 ## New Feature List
-We tirelessly work on our robots so that you don't have to. Our new offerings in software are included below.
-* Estimation of object distances using camera data: While other companies are defining state of the art algorithms on the road, we do it in your workplace. Making our robots 30% less likely to crash into objects than our competitors.
+The new offerings in software are included below.
+* Estimation of object distances using camera data: While other companies are defining state of the art algorithms on the road, the butler does it indoors. Making the robots less likely to crash into objects than the competitors.
 * Using lidar to map your environment: The butler records its surroundings in 3D so that it can see obstacles before they hit it.
-* Advanced data fusion algorithms: Our robots are cool but don't be fooled by their innocent appearance, they work super hard on the inside to crunch numbers faster than ever.
-* Path Planning: Using our custom sensors and the fusion technique, we can better plan the paths to avoid obstacles
+* Advanced data fusion algorithms: This robot is cool but don't be fooled by its innocent appearance, it works super hard on the inside to crunch numbers faster than ever. Combining the data from both the sensors, it gets a better estimate on how it should move.
+* Path Planning: Using our custom sensors and the fusion technique, the butler can plan the path better to avoid obstacles
 
 ---
 ## The Camera
@@ -56,9 +56,9 @@ Probability = C*e^((d-mean)/(2*variance))
 Where C is a normalization constant, mean is 0 and variance is tuned according to the data. The lidar outputs these probabilites.
 
 ## Sensor Fusion
-After the camera and lidar do the hard work of putting the information in a sensible format, the sensor fusion module takes the two readings and selects the higher probability of the two, for each heading direction. Although this might result in some noisy outputs, it gives a high probability of avoiding obstacles.
+After the camera and lidar do the hard work of putting the information in a sensible format, the sensor fusion module takes the two readings and selects the higher probability of the two, for each heading direction. Although this might result in some noisy outputs, it avoids obstacles effectively.
 
-Example: If say we have the incoming probabilities given below where the probabilities correspond to heading directions -30, -20, -10, 10, 20, 30 degrees from current heading direction.
+Example: If say we have the incoming probabilities given below where the probabilities correspond to heading directions -50, -30, -10, 10, 30, 50 degrees from current heading direction.
 ```
 P_image = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
 P_lidar = [0.6, 0.5, 0.4, 0.3, 0.2, 0,1];
@@ -88,27 +88,75 @@ Then the output of the path planner would be
 direction = 2 (index of 0.0)
 ```
 
+The robot later converts this direction into an angle by using
+
+```
+angle = (direction - 2.5)*20.0;
+```
+
 ## The Robot
 The robot is the class which uses all the other modules and creates instances of a camera, lidar, sensor fusion module and path planning module. It then uses the modules to run.
 <p align="center">
-<img src = "UML/initial/Activity_Diagram.jpg">
+<img src = "UML/Activity_Diagram_v2.jpg">
 </p>
 
 ---
-## SIP Overview
+## Results
+
+The software takes the camera image as well as the processed point cloud. I've configured the robot for three pictures by generating the respective lidar inputs.
+
+Following are the results
+1. Obstacle on the left
+<p align="center">
+<img src = "data/image_left.jpg" width="270" height="200">
+</p>
+
+```
+Output:
+[OK] Diagnostics are fine.
+Rotate robot counter clockwise by -10
+
+```
+
+2. Obstacle in the center
+<p align="center">
+<img src = "data/image_center.jpg" width="270" height="200">
+</p>
+
+```
+Output:
+[OK] Diagnostics are fine.
+Rotate robot counter clockwise by 50
+```
+
+3. Obstacle on the right 
+<p align="center">
+<img src = "data/image_right.jpg" width="270" height="200">
+</p>
+
+```
+Output:
+[OK] Diagnostics are fine.
+Rotate robot counter clockwise by -50
+```
+
+---
+## Solo Iterative Process Overview
 Click this link to view the product backlog, time sheets, defect logs and release backlog - [link](https://docs.google.com/spreadsheets/d/1WOvV6iL4gGOF8Qacwj2R3Lom71wziKXEf_UEhdGfOuY/edit?usp=sharing)
 
 Care has been taken to design the SIP tasks such that they have a direct relation to the previous tasks. This helps in better time estimation. For instance, the change in time taken for stub implementation is proportional to the change in time taken to implement the methods. This gave me a good idea to rethink about the allotment of time for future tasks.
 
 ---
-## Overview
+## Dependencies
 
 The butler software stack has the following dependencies:
 * cmake
 * googletest
 * opencv
 
-## Standard install via command-line
+To install opencv, follow the instructions on [link](https://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html)
+
+## How to build - standard install via command-line
 ```
 git clone --recursive https://github.com/karanvivekbhargava/robot-butler-enpm808x
 cd <path to repository>
@@ -116,109 +164,28 @@ mkdir build
 cd build
 cmake ..
 make
-Run tests: ./test/cpp-test
-Run program: ./app/shell-app
 ```
 
-## Building for code coverage (for assignments beginning in Week 4)
-```
-sudo apt-get install lcov
-cmake -D COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug ../
-make
-make code_coverage
-```
-This generates a index.html page in the build/coverage sub-directory that can be viewed locally in a web browser.
+## How to run demo
 
-## Working with Eclipse IDE ##
+After following the installation instructions above, you can try three different images from the data folder by specifying the argument with the program
 
-## Installation
-
-In your Eclipse workspace directory (or create a new one), checkout the repo (and submodules)
+To run for image_left.jpg, kindly enter the function below
 ```
-mkdir -p ~/workspace
-cd ~/workspace
-git clone --recursive https://github.com/karanvivekbhargava/robot-butler-enpm808x
+./app/shell-app left
+```
+To run for image_center.jpg, kindly enter the function below
+```
+./app/shell-app center
+```
+To run for image_right.jpg, kindly enter the function below
+```
+./app/shell-app right
 ```
 
-In your work directory, use cmake to create an Eclipse project for an [out-of-source build] of cpp-boilerplate
+## How to run tests
 
+After following the building instructions, run the command below
 ```
-cd ~/workspace
-mkdir -p boilerplate-eclipse
-cd boilerplate-eclipse
-cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_ECLIPSE_VERSION=4.7.0 -D CMAKE_CXX_COMPILER_ARG1=-std=c++14 ../cpp-boilerplate/
+./test/cpp-test
 ```
-
-## Import
-
-Open Eclipse, go to File -> Import -> General -> Existing Projects into Workspace -> 
-Select "boilerplate-eclipse" directory created previously as root directory -> Finish
-
-# Edit
-
-Source files may be edited under the "[Source Directory]" label in the Project Explorer.
-
-
-## Build
-
-To build the project, in Eclipse, unfold boilerplate-eclipse project in Project Explorer,
-unfold Build Targets, double click on "all" to build all projects.
-
-## Run
-
-1. In Eclipse, right click on the boilerplate-eclipse in Project Explorer,
-select Run As -> Local C/C++ Application
-
-2. Choose the binaries to run (e.g. shell-app, cpp-test for unit testing)
-
-
-## Debug
-
-
-1. Set breakpoint in source file (i.e. double click in the left margin on the line you want 
-the program to break).
-
-2. In Eclipse, right click on the boilerplate-eclipse in Project Explorer, select Debug As -> 
-Local C/C++ Application, choose the binaries to run (e.g. shell-app).
-
-3. If prompt to "Confirm Perspective Switch", select yes.
-
-4. Program will break at the breakpoint you set.
-
-5. Press Step Into (F5), Step Over (F6), Step Return (F7) to step/debug your program.
-
-6. Right click on the variable in editor to add watch expression to watch the variable in 
-debugger window.
-
-7. Press Terminate icon to terminate debugging and press C/C++ icon to switch back to C/C++ 
-perspetive view (or Windows->Perspective->Open Perspective->C/C++).
-
-
-## Plugins
-
-- CppChEclipse
-
-    To install and run cppcheck in Eclipse
-
-    1. In Eclipse, go to Window -> Preferences -> C/C++ -> cppcheclipse.
-    Set cppcheck binary path to "/usr/bin/cppcheck".
-
-    2. To run CPPCheck on a project, right click on the project name in the Project Explorer 
-    and choose cppcheck -> Run cppcheck.
-
-
-- Google C++ Sytle
-
-    To include and use Google C++ Style formatter in Eclipse
-
-    1. In Eclipse, go to Window -> Preferences -> C/C++ -> Code Style -> Formatter. 
-    Import [eclipse-cpp-google-style][reference-id-for-eclipse-cpp-google-style] and apply.
-
-    2. To use Google C++ style formatter, right click on the source code or folder in 
-    Project Explorer and choose Source -> Format
-
-[reference-id-for-eclipse-cpp-google-style]: https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-cpp-google-style.xml
-
-- Git
-
-    It is possible to manage version control through Eclipse and the git plugin, but it typically requires creating another project. If you're interested in this, try it out yourself.
