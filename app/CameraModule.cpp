@@ -20,6 +20,7 @@
  */
 CameraModule::CameraModule() {
   diagnostic_ = true;  // Default to true value
+  // Loads the camera image
   // Read the file
   cv::Mat image = cv::imread("../data/image_left.jpg", cv::IMREAD_COLOR);
   // Resize the image to 360x480, since its too large

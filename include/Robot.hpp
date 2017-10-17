@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include "CameraModule.hpp"
 #include "PathPlanningModule.hpp"
 #include "LidarModule.hpp"
@@ -34,9 +35,16 @@ class Robot {
 
  public:
   /**
-   * @brief      Constructor
+   * @brief      Default constructor
    */
   Robot();
+
+  /**
+   * @brief      Overloaded constructor
+   *
+   * @param[in]  str   The string
+   */
+  explicit Robot(std::string str);
 
   /**
    * @brief      Destroys the object.
@@ -46,7 +54,7 @@ class Robot {
   /**
    * @brief      Starts the robots operation
    */
-  void run();
+  float run();
 
   /**
    * @brief      Gets the diagnostic.

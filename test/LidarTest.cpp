@@ -50,6 +50,22 @@ TEST_F(LidarTest, DiagnosticsCheck) {
  * @param[in]  ComputeProbabilitiesCheck  Name of the test
  */
 TEST_F(LidarTest, ComputeProbabilitiesCheck) {
+  // Initialize the lidar readings
+  // For the lidar, input the dummy data
+  std::vector<std::vector<float>> input;
+  for (int i = 0; i < 6; i++) {
+    std::vector<float> p;
+    if (i == 0) {
+      p = {2, 1.2, 2};
+    } else if (i == 1) {
+      p = {1, 1, 3};
+    } else {
+      p = {10000, 10000, 1};
+    }
+    input.push_back(p);
+  }
+  lidar.setInput(input);
+
   // Initialize the probabilites
   std::vector<float> p = lidar.computeProbabilities();
   std::vector<float> ref = {0.761854, 0.904837, 0, 0, 0, 0};

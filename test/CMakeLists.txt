@@ -11,10 +11,12 @@ add_executable(
     LidarTest.cpp
     PathPlanningTest.cpp
     SensorFusionTest.cpp
+    RobotTest.cpp
     ../app/CameraModule.cpp
     ../app/LidarModule.cpp
     ../app/PathPlanningModule.cpp
     ../app/SensorFusionModule.cpp
+    ../app/Robot.cpp
     
 )
 

@@ -1,5 +1,5 @@
 /** 
- *  @file    CameraModule.cpp
+ *  @file    CameraTest.cpp
  *  @author  Karan Vivek Bhargava
  *  @copyright MIT License
  *  

@@ -20,23 +20,6 @@
  * @brief      Constructs the object.
  */
 LidarModule::LidarModule() {
-  std::string str = "left";  // Dummy data for the image_left.png
-  // Loads a set of points
-  if (str == "left") {
-    std::vector<std::vector<float>> input;
-    for (int i = 0; i < 6; i++) {
-      std::vector<float> p;
-      if (i == 0) {
-        p = {2, 1.2, 2};
-      } else if (i == 1) {
-        p = {1, 1, 3};
-      } else {
-        p = {10000, 10000, 1};
-      }
-      input.push_back(p);
-    }
-    setInput(input);
-  }
   diagnostic_ = true;
 }
 
